@@ -30,7 +30,7 @@ def execute_script(evaluate, stack, data,l):
         elif op == "OP_CHECKSIG":
             is_valid = op_codes.op_checksig(stack,data,l)
         else:
-            raise Exception("Unsupported operation")
+            is_valid = False
         
         i += 1
 
@@ -110,6 +110,9 @@ coinbase_hash = coinbase.coinbase_tx("verified_transactions")
 
 txid_list = coinbase.extract_txids_from_folder("verified_transactions")
 
+txid_list = ["0000000000000000000000000000000000000000000000000000000000000000"] + txid_list
+
+# print(txid_list)
 
 # Output file path
 output_file = "output.txt"
