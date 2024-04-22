@@ -27,7 +27,7 @@ def mining():
         header = (
              ver + 
             bytes.fromhex(prev_block)[::-1] + 
-            bytes.fromhex(mrkl_root)[::-1] + 
+            bytes.fromhex(mrkl_root) + 
             struct.pack("<LLL", time_, bits, nonce)
         )
     # print(header.hex())

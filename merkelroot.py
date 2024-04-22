@@ -26,8 +26,6 @@ def hash2(a, b):
 	
 def return_merkelhash():
     txHashes = coinbase.extract_txids_from_folder("verified_transactions")
-    # txHashes = txHashes[::-1]
-    # print(txHashes)
     merkle_root = merkle(txHashes)
     # print("Merkle Root:", merkle_root)
     return merkle_root, txHashes
