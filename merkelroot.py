@@ -16,13 +16,18 @@ def merkle(hashList):
 def hash2(a, b):
     # Reverse inputs before and after hashing
     # due to big-endian / little-endian nonsense
-    a1 = bytes.fromhex(a)[::-1]
-    b1 = bytes.fromhex(b)[::-1]
+    # a1 = bytes.fromhex(a)[::-1]
+    a1 = bytes.fromhex(a)
+    # b1 = bytes.fromhex(b)[::-1]
+    b1 = bytes.fromhex(b)
     h = hashlib.sha256(hashlib.sha256(a1+b1).digest()).digest()
-    return h[::-1].hex()
+    # return h[::-1].hex()
+    return h.hex()
 	
 def return_merkelhash():
     txHashes = coinbase.extract_txids_from_folder("verified_transactions")
+    # txHashes = txHashes[::-1]
+    # print(txHashes)
     merkle_root = merkle(txHashes)
     # print("Merkle Root:", merkle_root)
     return merkle_root, txHashes
