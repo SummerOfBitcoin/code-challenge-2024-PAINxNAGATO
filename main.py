@@ -88,6 +88,10 @@ def write_to_txt(block_header, coinbase_txn, txid_list, output_file):
         for txid in txid_list:
             file.write(txid + '\n')
 
+def reverse_byte_order(txid):
+    # Assuming txid is a hexadecimal string
+    return txid[::-1]
+
 input_folder = "mempool"
 
 output_folder = "categorized_scripts/p2pkh"
@@ -112,10 +116,14 @@ txid_list = coinbase.extract_txids_from_folder("verified_transactions")
 
 txid_list = ["0000000000000000000000000000000000000000000000000000000000000000"] + txid_list
 
+txid_list_reversed = [reverse_byte_order(txid) for txid in txid_list]
+
+# print(txid_list_reversed)
+
 # print(txid_list)
 
 # Output file path
 output_file = "output.txt"
 
 # Write data to output file
-write_to_txt(block_header, coinbase_hash, txid_list, output_file)
+write_to_txt(block_header, coinbase_hash, txid_list_reversed, output_file)
