@@ -3,7 +3,7 @@ import struct
 import merkelroot
 import time
 def mining():
-    ver = 2
+    ver = bytes.fromhex("00000020")
     prev_block = "0000000000000000000000000000000000000000000000000000000000000000"
     mrkl_root,txhash = merkelroot.return_merkelhash()
 # 8a97295a2747b4f1a0b3948df3990344c0e19fa6b2b92b3a19c8e6badc141787
@@ -25,7 +25,7 @@ def mining():
     nonce = 1 # success : 77585 (0x12f11). 
     while nonce < 0x100000000:
         header = (
-            struct.pack("<L", ver) + 
+             ver + 
             bytes.fromhex(prev_block)[::-1] + 
             bytes.fromhex(mrkl_root)[::-1] + 
             struct.pack("<LLL", time_, bits, nonce)
