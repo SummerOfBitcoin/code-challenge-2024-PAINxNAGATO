@@ -31,8 +31,8 @@ def reverse_byte_order(txid):
 def return_merkelhash():
     txHashes = coinbase.extract_txids_from_folder("verified_transactions")
     txHashes = ["0000000000000000000000000000000000000000000000000000000000000000"] + txHashes
-    txid_list_reversed = [reverse_byte_order(txid) for txid in txHashes]
-    merkle_root = merkle(txid_list_reversed)
+    # txid_list_reversed = [reverse_byte_order(txid) for txid in txHashes]
+    merkle_root = merkle(txHashes)
     # print("Merkle Root:", merkle_root)
     return merkle_root
 
