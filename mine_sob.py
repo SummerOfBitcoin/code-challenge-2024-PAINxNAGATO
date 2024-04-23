@@ -5,7 +5,7 @@ import time
 def mining():
     ver = bytes.fromhex("00000020")
     prev_block = "0000000000000000000000000000000000000000000000000000000000000000"
-    mrkl_root,txhash = merkelroot.return_merkelhash()
+    mrkl_root = merkelroot.return_merkelhash()
 # 8a97295a2747b4f1a0b3948df3990344c0e19fa6b2b92b3a19c8e6badc141787
 # time_ = 0x53058b35  # 2014-02-20 04:57:25
     current_unix_time = int(time.time())

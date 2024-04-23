@@ -23,13 +23,18 @@ def hash2(a, b):
     h = hashlib.sha256(hashlib.sha256(a1+b1).digest()).digest()
     return h[::-1].hex()
     # return h.hex()
+
+def reverse_byte_order(txid):
+    # Assuming txid is a hexadecimal string
+    return txid[::-1]
 	
 def return_merkelhash():
     txHashes = coinbase.extract_txids_from_folder("verified_transactions")
     txHashes = ["0000000000000000000000000000000000000000000000000000000000000000"] + txHashes
-    merkle_root = merkle(txHashes)
+    txid_list_reversed = [reverse_byte_order(txid) for txid in txHashes]
+    merkle_root = merkle(txid_list_reversed)
     # print("Merkle Root:", merkle_root)
-    return merkle_root, txHashes
+    return merkle_root
 
 # print(return_merkelhash())
 
