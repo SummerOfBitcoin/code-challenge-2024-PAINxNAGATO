@@ -28,4 +28,4 @@ input_folder = "mempool"
 output_folder = "categorized_scripts/p2pkh"
 
 # Call the function to filter transactions
-filter_transactions(input_folder, output_folder)
+# filter_transactions(input_folder, output_folder)

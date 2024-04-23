@@ -63,7 +63,7 @@ def coinbase_tx(folder_path):
 
     bf_hex = struct.pack('<Q', block_fees).hex()
 
-    message = version + marker + flag + inputcount + txid + vout + scriptsigsize + scriptsig + sequence + outputcount + bf_hex + scriptpubkeysize + scriptpubkey + locktime
+    message = version + inputcount + txid + vout + scriptsigsize + scriptsig + sequence + outputcount + bf_hex + scriptpubkeysize + scriptpubkey + locktime
 
     # print(message)
 
