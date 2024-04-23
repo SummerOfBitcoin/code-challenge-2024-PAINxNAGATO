@@ -5,6 +5,7 @@ import shutil
 import coinbase
 import mine_sob
 import UniqueScript
+import txid_hashes
 
 #---------------------------------------------------------------------#
 # fucntion defination :
@@ -112,11 +113,11 @@ block_header = mine_sob.mining()
 
 coinbase_hash = coinbase.coinbase_tx("verified_transactions")
 
-txid_list = coinbase.extract_txids_from_folder("verified_transactions")
+txid_list = txid_hashes.extract_txids_from_folder("verified_transactions")
 
 txid_list = ["0000000000000000000000000000000000000000000000000000000000000000"] + txid_list
 
-txid_list_reversed = [reverse_byte_order(txid) for txid in txid_list]
+# txid_list_reversed = [reverse_byte_order(txid) for txid in txid_list]
 
 # print(txid_list_reversed)
 
@@ -126,4 +127,4 @@ txid_list_reversed = [reverse_byte_order(txid) for txid in txid_list]
 output_file = "output.txt"
 
 # Write data to output file
-write_to_txt(block_header, coinbase_hash, txid_list_reversed, output_file)
+write_to_txt(block_header, coinbase_hash, txid_list, output_file)

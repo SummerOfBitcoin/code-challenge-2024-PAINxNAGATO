@@ -1,6 +1,6 @@
 import hashlib
-import coinbase
-
+# import coinbase
+import txid_hashes
 # Hash pairs of items recursively until a single value is obtained
 def merkle(hashList):
     if len(hashList) == 1:
@@ -17,9 +17,7 @@ def hash2(a, b):
     # Reverse inputs before and after hashing
     # due to big-endian / little-endian nonsense
     a1 = bytes.fromhex(a)[::-1]
-    # a1 = bytes.fromhex(a)
     b1 = bytes.fromhex(b)[::-1]
-    # b1 = bytes.fromhex(b)
     h = hashlib.sha256(hashlib.sha256(a1+b1).digest()).digest()
     return h[::-1].hex()
     # return h.hex()
@@ -29,10 +27,10 @@ def reverse_byte_order(txid):
     return txid[::-1]
 	
 def return_merkelhash():
-    txHashes = coinbase.extract_txids_from_folder("verified_transactions")
+    txHashes = txid_hashes.extract_txids_from_folder("verified_transactions")
     txHashes = ["0000000000000000000000000000000000000000000000000000000000000000"] + txHashes
-    txid_list_reversed = [reverse_byte_order(txid) for txid in txHashes]
-    merkle_root = merkle(txid_list_reversed)
+    # txid_list_reversed = [reverse_byte_order(txid) for txid in txHashes]
+    merkle_root = merkle(txHashes)
     # print("Merkle Root:", merkle_root)
     return merkle_root
 

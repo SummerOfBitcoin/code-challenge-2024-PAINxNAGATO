@@ -70,19 +70,19 @@ def coinbase_tx(folder_path):
     return message
 
 # coinbase_tx()
-def extract_txids_from_folder(folder_path):
-    txids = []
-    for filename in os.listdir(folder_path):
-        if filename.endswith('.json'):
-            filepath = os.path.join(folder_path, filename)
-            with open(filepath, 'r') as file:
-                data = json.load(file)
-                vin = data.get('vin', [])
-                for item in vin:
-                    txid = item.get('txid')
-                    if txid:
-                        txids.append(txid)
-    return txids
+# def extract_txids_from_folder(folder_path):
+#     txids = []
+#     for filename in os.listdir(folder_path):
+#         if filename.endswith('.json'):
+#             filepath = os.path.join(folder_path, filename)
+#             with open(filepath, 'r') as file:
+#                 data = json.load(file)
+#                 vin = data.get('vin', [])
+#                 for item in vin:
+#                     txid = item.get('txid')
+#                     if txid:
+#                         txids.append(txid)
+#     return txids
 
 # print(extract_txids_from_folder(folder_path))
 
