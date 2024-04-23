@@ -82,11 +82,11 @@ def write_to_txt(block_header, coinbase_txn, txid_list, output_file):
         file.write(block_header + '\n')
         
         # Write coinbase transaction hash on the second row
-        file.write(coinbase_txn + '\n')
+        file.write(coinbase_txn)
         
         # Write txids on subsequent rows
         for txid in txid_list:
-            file.write(txid + '\n')
+            file.write('\n' + txid)
 
 def reverse_byte_order(txid):
     # Assuming txid is a hexadecimal string
