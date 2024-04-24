@@ -81,7 +81,7 @@ def coinbase_tx(folder_path):
     wtxid_commit = wtxid.wtxid_commitment(wit_roothash,item)
 
 
-    block_fees = (amount_newblock + sum_of_differences)*4 
+    block_fees = amount_newblock + sum_of_differences
 
     bf_hex = struct.pack('<Q', block_fees).hex()
 
