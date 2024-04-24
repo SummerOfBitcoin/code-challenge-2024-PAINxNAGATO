@@ -21,7 +21,7 @@ scriptsig = "0300000004f15ccf5609013803062b9b5a0100072f425443432f20"
 
 sequence = "ffffffff"
 
-outputcount = "01"
+outputcount = "02"
 
 # amount = "will look later"
 
@@ -87,7 +87,7 @@ def coinbase_tx(folder_path):
 
 
 
-    message = version + inputcount + txid + vout + scriptsigsize + scriptsig + sequence + outputcount + bf_hex + scriptpubkeysize + scriptpubkey + amount_output2 + scriptpubkey_size_2 + fixed_header + wtxid_commit + witness_stackitems + item_size + item + locktime
+    message = version + marker + flag + inputcount + txid + vout + scriptsigsize + scriptsig + sequence + outputcount + bf_hex + scriptpubkeysize + scriptpubkey + amount_output2 + scriptpubkey_size_2 + fixed_header + wtxid_commit + witness_stackitems + item_size + item + locktime
 
     # print(message)
 
