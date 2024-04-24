@@ -1,6 +1,7 @@
 import os
 import json
 import struct
+import wtxid
 
 version = "01000000"
 
@@ -27,6 +28,20 @@ outputcount = "01"
 scriptpubkeysize = "19"
 
 scriptpubkey = "76a914e1b3cbb1e09432b44976c49e979dbf0d07b0c0a488ac"
+
+amount_output2 = "0000000000000000"
+
+fixed_header = "6a24aa21a9ed"
+
+scriptpubkey_size_2 = "26" 
+
+# scriptpubkey_2 = ""
+
+witness_stackitems = "01"
+
+item_size = "20"
+
+item = "0000000000000000000000000000000000000000000000000000000000000000"
 
 locktime = "00000000"
 
@@ -56,33 +71,30 @@ def calculate_sum_of_differences(folder_path):
 
 # print(bf_hex)
 
+
+
 def coinbase_tx(folder_path):
     sum_of_differences = calculate_sum_of_differences(folder_path)
+
+    wit_roothash = wtxid.witness_roothash(folder_path)
+
+    wtxid_commit = wtxid.wtxid_commitment(wit_roothash,item)
+
 
     block_fees = amount_newblock + sum_of_differences
 
     bf_hex = struct.pack('<Q', block_fees).hex()
 
-    message = version + inputcount + txid + vout + scriptsigsize + scriptsig + sequence + outputcount + bf_hex + scriptpubkeysize + scriptpubkey + locktime
+
+
+    message = version + marker + flag + inputcount + txid + vout + scriptsigsize + scriptsig + sequence + outputcount + bf_hex + scriptpubkeysize + scriptpubkey + amount_output2 + scriptpubkey_size_2 + fixed_header + wtxid_commit + witness_stackitems + item_size + item + locktime
 
     # print(message)
 
     return message
 
-# coinbase_tx()
-# def extract_txids_from_folder(folder_path):
-#     txids = []
-#     for filename in os.listdir(folder_path):
-#         if filename.endswith('.json'):
-#             filepath = os.path.join(folder_path, filename)
-#             with open(filepath, 'r') as file:
-#                 data = json.load(file)
-#                 vin = data.get('vin', [])
-#                 for item in vin:
-#                     txid = item.get('txid')
-#                     if txid:
-#                         txids.append(txid)
-#     return txids
 
-# print(extract_txids_from_folder(folder_path))
+
+
+
 
