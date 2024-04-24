@@ -81,7 +81,7 @@ def coinbase_tx(folder_path):
     wtxid_commit = wtxid.wtxid_commitment(wit_roothash,item)
 
 
-    block_fees = amount_newblock + sum_of_differences
+    block_fees = (amount_newblock + sum_of_differences)*4 
 
     bf_hex = struct.pack('<Q', block_fees).hex()
 
@@ -89,7 +89,7 @@ def coinbase_tx(folder_path):
 
     message = version + marker + flag + inputcount + txid + vout + scriptsigsize + scriptsig + sequence + outputcount + bf_hex + scriptpubkeysize + scriptpubkey + amount_output2 + scriptpubkey_size_2 + fixed_header + wtxid_commit + witness_stackitems + item_size + item + locktime
 
-    # print(message)
+    print(sum_of_differences)
 
     return message
 
