@@ -24,8 +24,8 @@ def filter_transactions(input_folder, output_folder):
                     shutil.copyfile(input_file_path, output_file_path)
 
 # Define input and output folders
-input_folder = "mempool"
-output_folder = "categorized_scripts/p2pkh"
+# input_folder = "mempool"
+# output_folder = "categorized_scripts/p2pkh"
 
 # Call the function to filter transactions
 # filter_transactions(input_folder, output_folder)

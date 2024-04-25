@@ -6,11 +6,13 @@ import coinbase
 import mine_sob
 import UniqueScript
 import txid_hashes
+import v0_p2wpkh
+import categorize
 
 #---------------------------------------------------------------------#
 # fucntion defination :
 #---------------------------------------------------------------------#
-def execute_script(evaluate, stack, data,l):
+def execute_script_p2pkh(evaluate, stack, data,l):
     global c
     tokens = evaluate.split(" ")
     stack = []
@@ -42,15 +44,21 @@ def stack_evalute(data):
   l = 1
 #   script_result = True
   for vin in data['vin']:
-    if vin:
+    if vin["prevout"]["scriptpubkey_type"] == "p2pkh":
       evaluate = ''
       scriptsig_asm = vin.get('scriptsig_asm', '')
       scriptpubkey_asm = vin['prevout'].get('scriptpubkey_asm', '') if 'prevout' in vin else ''
       evaluate = scriptsig_asm + ' ' + scriptpubkey_asm
       stack = []
-      if(not execute_script(evaluate,stack,data,l)):
+      if(not execute_script_p2pkh(evaluate,stack,data,l)):
          return False
       l+= 1
+    elif vin["prevout"]["scriptpubkey_type"] == "v0_p2wpkh":
+       scriptsig = vin["witness"][0]
+       pubkey = vin["witness"][1]
+       pubkey_hash = vin["prevout"]["scriptpubkey"][4:]
+       if(not v0_p2wpkh.execute_script_V0p2wpkh(data,scriptsig,pubkey,pubkey_hash)):
+          return False
   return True
 
 # parse json
@@ -82,26 +90,35 @@ def write_to_txt(block_header, coinbase_txn, txid_list, output_file):
         # Write block header on the first row
         file.write(block_header + '\n')
         
-        # Write coinbase transaction hash on the second row
+        # Write coinbase transaction hash on input_folder = "mempool"
+# output_folder = "categorized_scripts/p2pkh"the second row
         file.write(coinbase_txn)
         
         # Write txids on subsequent rows
         for txid in txid_list:
             file.write('\n' + txid)
 
-def reverse_byte_order(txid):
-    # Assuming txid is a hexadecimal string
-    return txid[::-1]
+# def reverse_byte_order(txid):
+#     # Assuming txid is a hexadecimal string
+#     return txid[::-1]
 
 input_folder = "mempool"
 
-output_folder = "categorized_scripts/p2pkh"
+output_folder_p2pkh = "categorized_scripts/p2pkh"
 
-UniqueScript.filter_transactions(input_folder, output_folder)
+output_folder_p2wpkh = "categorized_scripts/v0_p2wpkh"
 
-folder_path = 'categorized_scripts/p2pkh'
+output_merged = "merged_folder"
 
-valid_count = parse_json_files_in_folder(folder_path)
+UniqueScript.filter_transactions(input_folder, output_folder_p2pkh)
+
+categorize.p2wpkh_single(input_folder,output_folder_p2wpkh)
+
+categorize.merge_folders(output_folder_p2pkh,output_folder_p2wpkh,output_merged)
+
+# folder_path = 'categorized_scripts/p2pkh'
+
+valid_count = parse_json_files_in_folder(output_merged)
 
 # print(f"{valid_count}")
 
