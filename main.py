@@ -112,15 +112,18 @@ output_merged = "merged_folder"
 
 UniqueScript.filter_transactions(input_folder, output_folder_p2pkh)
 
-categorize.p2wpkh_single(input_folder,output_folder_p2wpkh)
+# categorize.p2wpkh_single(input_folder,output_folder_p2wpkh)
 
-categorize.merge_folders(output_folder_p2pkh,output_folder_p2wpkh,output_merged)
+# categorize.merge_folders(output_folder_p2pkh,output_folder_p2wpkh,output_merged)
 
 # folder_path = 'categorized_scripts/p2pkh'
 
-valid_count = parse_json_files_in_folder(output_merged)
+# valid_count = parse_json_files_in_folder(output_merged)
 
-# print(f"{valid_count}")
+valid_count = parse_json_files_in_folder("categorized_scripts/p2pkh")
+
+
+print(f"{valid_count}")
 
 
 
