@@ -166,6 +166,7 @@ def message_serilization_p2wpkh(data,sigscript,pubkey,pubkey_hash):
         version = "02000000"
 
     input = ""
+    sequence = ""
     for vin in data['vin']:
         big_endian_txid = vin['txid']
         little_endian_txid = ''.join(reversed([big_endian_txid[i:i+2] for i in range(0, len(big_endian_txid), 2)]))
@@ -173,21 +174,24 @@ def message_serilization_p2wpkh(data,sigscript,pubkey,pubkey_hash):
         input += little_endian_txid
 
         vout = vin["vout"]
-        vout_bytes = struct.pack('<I', int(vout))
+        vout_bytes = struct.pack('<I', vout)
         input += vout_bytes.hex()
 
-        sequence = vin["sequence"]
-        sequence = struct.pack('<I', sequence).hex()
+        sequence_raw = vin["sequence"]
+        sequence += struct.pack('<I', sequence_raw).hex()
         
         # sequence_hash = double_sha256(bytes.fromhex(sequence)).hex()
 
-        scriptcode = "1976a914" + pubkey_hash + "88ac"
+    
+    scriptcode = "1976a914" + pubkey_hash + "88ac"
 
-        amount = struct.pack('<Q', vin['prevout']['value']).hex()
+    amount = struct.pack('<Q', vin['prevout']['value']).hex()
     
     input_hash = double_sha256(bytes.fromhex(input)).hex()
 
     sequence_hash = double_sha256(bytes.fromhex(sequence)).hex()
+
+
 
 
     

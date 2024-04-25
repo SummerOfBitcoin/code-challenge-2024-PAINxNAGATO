@@ -2,7 +2,7 @@ import op_codes
 import sig_verification
 import json 
 def execute_script_V0p2wpkh(data,scriptsig,pubkey,pubkey_hash):
-    is_valid = True
+   #  is_valid = True
     try_pubkeyhash = op_codes.hash160(pubkey)
     if(try_pubkeyhash == pubkey_hash):
        message = op_codes.message_serilization_p2wpkh(data,scriptsig,pubkey,pubkey_hash)

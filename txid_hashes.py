@@ -93,7 +93,7 @@ def transaction_header_p2wpkh(data):
 
     if(version == 1):
         version = "01000000"
-    else :
+    elif(version == 2):
         version = "02000000"
 
     message += version
@@ -107,14 +107,15 @@ def transaction_header_p2wpkh(data):
         message += little_endian_txid
 
         vout = vin["vout"]
-        vout_bytes = struct.pack('<I', int(vout))
+        vout_bytes = struct.pack('<I', vout)
         message += vout_bytes.hex()
 
         # length_pubkey = len(vin["scriptsig"])
         # message += hex(int(length_pubkey/2))[2:]
         message += "00" # scriptsig_size
         # message += vin["scriptsig"]
-        message += "" # sciprtsig
+        # message += "" # sciprtsig
+
         sequence = vin["sequence"]
         sequence_bytes = struct.pack('<I', sequence).hex()
         message += sequence_bytes
@@ -153,7 +154,7 @@ def transaction_header_p2wpkh(data):
     #     message += vin["witness"][1]
     
 
-    locktime = struct.pack('<I', int(data["locktime"])).hex()
+    locktime = struct.pack('<I', data["locktime"]).hex()
 
     # print(locktime)
 
