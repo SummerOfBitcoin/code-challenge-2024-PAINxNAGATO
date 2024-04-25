@@ -16,4 +16,4 @@ def compact_size_calculator(number):
 # Test the function
 # number = 101
 # compact_size = compact_size_calculator(number)
-# print("Compact Size Representation:", type(compact_size))
+# print("Compact Size Representation:", compact_size)

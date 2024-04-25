@@ -137,7 +137,8 @@ def transaction_header_p2wpkh(data):
         # print(struct.pack('<Q', vout['value']).hex())
         message += struct.pack('<Q', vout['value']).hex()
         size_pubkey = len(vout["scriptpubkey"])
-        message += hex(int(size_pubkey/2))[2:]
+        message += compactSize.compact_size_calculator(int(size_pubkey/2))
+        # message += hex(int(size_pubkey/2))[2:]
         message += vout["scriptpubkey"]
 
     # for vin in data['vin']:
@@ -202,3 +203,8 @@ def transaction_header_p2wpkh(data):
 #                 #     if txid:
 #                 #         txids.append(txid)
 #     return txids
+
+
+#02000000014f7efa32f4cb24fdd1334af21de6e6bf8d3f39e1fc4bf415ba88fbe05775453c0100000000fdffffff02011c0000000000001600146ede86efa7b4f5beae851ebff27bdf96a0733d4de02d0700000000001600143a6fd353ebcb81b6729bbd64354bb651ab0826a000000000
+
+#02000000013a53de6e1fe821452674c5435e3989eecdf35cb1de1c8bafb674f543a55d658c3600000000fdffffff01599aea0400000000160014cfbd92a6337e8b6043552d6fc5c35c7e5062281e00000000
