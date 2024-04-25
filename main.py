@@ -73,18 +73,21 @@ def parse_json_files_in_folder(folder_path):
           filepath = os.path.join(folder_path, filename)
           with open(filepath, 'r') as file:
             data = json.load(file)
-            # print(file)
-            result = stack_evalute(data)
-            # print(result)
-            if(result):
-               cnt_valid += 1
-               verified_filepath = os.path.join(verified_folder, filename)
-               shutil.copy(filepath, verified_filepath)
-            # else :
-            #    print(file)
-            #    verified_filepath = os.path.join(verified_folder, filename)
-            #    with open(verified_filepath, 'w') as verified_file:
-            #       json.dump(data, verified_file)
+            json_str = json.dumps(data)
+            data_size = len(json_str.encode('utf-8'))
+            if(data_size < 100000):
+                # print(file)
+                result = stack_evalute(data)
+                # print(result)
+                if(result):
+                    cnt_valid += 1
+                    verified_filepath = os.path.join(verified_folder, filename)
+                    shutil.copy(filepath, verified_filepath)
+                # else :
+                #    print(file)
+                #    verified_filepath = os.path.join(verified_folder, filename)
+                #    with open(verified_filepath, 'w') as verified_file:
+                #       json.dump(data, verified_file)
     return cnt_valid
 
 def write_to_txt(block_header, coinbase_txn, txid_list, output_file):
@@ -104,21 +107,21 @@ def reverse_byte_order(txid):
     # Assuming txid is a hexadecimal string
     return txid[::-1]
 
-# input_folder = "mempool"
+input_folder = "mempool"
 
-# output_folder_p2pkh = "categorized_scripts/p2pkh"
+output_folder_p2pkh = "categorized_scripts/p2pkh"
 
-# output_folder_p2wpkh = "categorized_scripts/v0_p2wpkh"
+output_folder_p2wpkh = "categorized_scripts/v0_p2wpkh"
 
-# output_merged = "merged_folder"
+output_merged = "merged_folder"
 
-# UniqueScript.filter_transactions(input_folder, output_folder_p2pkh)
+UniqueScript.filter_transactions(input_folder, output_folder_p2pkh)
 
-# categorize.p2wpkh_single(input_folder,output_folder_p2wpkh)
+categorize.p2wpkh_single(input_folder,output_folder_p2wpkh)
 
-# categorize.merge_folders(output_folder_p2pkh,output_folder_p2wpkh,output_merged)
+categorize.merge_folders(output_folder_p2pkh,output_folder_p2wpkh,output_merged)
 
-# valid_count = parse_json_files_in_folder(output_merged)
+valid_count = parse_json_files_in_folder(output_merged)
 
 # print(f"{valid_count}")
 
