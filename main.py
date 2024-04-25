@@ -100,9 +100,9 @@ def write_to_txt(block_header, coinbase_txn, txid_list, output_file):
         for txid in txid_list:
             file.write('\n' + txid)
 
-# def reverse_byte_order(txid):
-#     # Assuming txid is a hexadecimal string
-#     return txid[::-1]
+def reverse_byte_order(txid):
+    # Assuming txid is a hexadecimal string
+    return txid[::-1]
 
 # input_folder = "mempool"
 
