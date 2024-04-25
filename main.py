@@ -75,6 +75,7 @@ def parse_json_files_in_folder(folder_path):
             data = json.load(file)
             json_str = json.dumps(data)
             data_size = len(json_str.encode('utf-8'))
+            data_size += 5571
             if(data_size < 100000):
                 # print(file)
                 result = stack_evalute(data)
@@ -123,7 +124,7 @@ categorize.merge_folders(output_folder_p2pkh,output_folder_p2wpkh,output_merged)
 
 valid_count = parse_json_files_in_folder(output_merged)
 
-# print(f"{valid_count}")
+print(f"{valid_count}")
 
 
 
