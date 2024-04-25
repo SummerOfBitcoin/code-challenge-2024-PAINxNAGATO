@@ -198,11 +198,12 @@ def message_serilization_p2wpkh(data,sigscript,pubkey,pubkey_hash):
         # if()
         ouput += struct.pack('<Q', vout['value']).hex()
         size_pubkey = len(vout["scriptpubkey"])
-        ouput += hex(int(size_pubkey/2))[2:]
+        # ouput += hex(int(size_pubkey/2))[2:]
+        ouput += compactSize.compact_size_calculator(int(size_pubkey/2))
         ouput += vout["scriptpubkey"]
 
-    if(len(ouput) % 2 != 0):
-        ouput += "0"
+    # if(len(ouput) % 2 != 0):
+    #     ouput += "0"
 
 
     # print(ouput)

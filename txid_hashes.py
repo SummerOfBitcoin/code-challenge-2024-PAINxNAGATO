@@ -33,7 +33,8 @@ def transaction_header_p2pkh(data):
         message += vout_bytes.hex()
 
         length_pubkey = len(vin["scriptsig"])
-        message += hex(int(length_pubkey/2))[2:]
+        # message += hex(int(length_pubkey/2))[2:]
+        message += compactSize.compact_size_calculator(int(length_pubkey/2))
         message += vin["scriptsig"]
         sequence = vin["sequence"]
         sequence_bytes = struct.pack('<I', sequence).hex()
@@ -49,7 +50,8 @@ def transaction_header_p2pkh(data):
         # print(struct.pack('<Q', vout['value']).hex())
         message += struct.pack('<Q', vout['value']).hex()
         size_pubkey = len(vout["scriptpubkey"])
-        message += hex(int(size_pubkey/2))[2:]
+        # message += hex(int(size_pubkey/2))[2:]
+        message += compactSize.compact_size_calculator(int(size_pubkey/2))
         message += vout["scriptpubkey"]
 
     locktime = struct.pack('<I', int(data["locktime"])).hex()

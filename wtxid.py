@@ -121,7 +121,8 @@ def wtxid_p2wpkh(data):
         # print(struct.pack('<Q', vout['value']).hex())
         message += struct.pack('<Q', vout['value']).hex()
         size_pubkey = len(vout["scriptpubkey"])
-        message += hex(int(size_pubkey/2))[2:]
+        # message += hex(int(size_pubkey/2))[2:]
+        message += compactSize.compact_size_calculator(int(size_pubkey/2))
         message += vout["scriptpubkey"]
 
     for vin in data['vin']:
@@ -129,13 +130,15 @@ def wtxid_p2wpkh(data):
 
         size_sigscript = len(vin["witness"][0])
 
-        message += hex(int(size_sigscript/2))[2:]
+        # message += hex(int(size_sigscript/2))[2:]
+        message += compactSize.compact_size_calculator(int(size_sigscript/2))
 
         message  += vin["witness"][0]
 
         size_pubkey_out = len(vin["witness"][1])
 
-        message  += hex(int(size_pubkey_out/2))[2:]
+        # message  += hex(int(size_pubkey_out/2))[2:]
+        message += compactSize.compact_size_calculator(int(size_pubkey_out/2))
 
         message += vin["witness"][1]
     

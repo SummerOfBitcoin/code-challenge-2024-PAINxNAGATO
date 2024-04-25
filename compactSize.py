@@ -14,6 +14,6 @@ def compact_size_calculator(number):
         raise ValueError("Number is too large to be represented with compact size.")
 
 # Test the function
-# number = 101
+# number = 22
 # compact_size = compact_size_calculator(number)
 # print("Compact Size Representation:", compact_size)
