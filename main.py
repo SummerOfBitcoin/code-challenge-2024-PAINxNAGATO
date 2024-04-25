@@ -120,9 +120,7 @@ def write_to_txt(block_header, coinbase_txn, txid_list, output_file):
 
 # valid_count = parse_json_files_in_folder(output_merged)
 
-# valid_count = parse_json_files_in_folder(output_folder_p2wpkh)
-
-print(f"{valid_count}")
+# print(f"{valid_count}")
 
 
 
