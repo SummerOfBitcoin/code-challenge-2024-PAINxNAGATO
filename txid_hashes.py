@@ -87,7 +87,7 @@ def extract_txids_from_folder(folder_path):
 
 def transaction_header_p2wpkh(data):
 
-    message = ''
+    message = ""
 
     version = data['version']
 
