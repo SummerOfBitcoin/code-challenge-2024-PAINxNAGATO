@@ -73,22 +73,18 @@ def parse_json_files_in_folder(folder_path):
           filepath = os.path.join(folder_path, filename)
           with open(filepath, 'r') as file:
             data = json.load(file)
-            json_str = json.dumps(data)
-            data_size = len(json_str.encode('utf-8'))
-            data_size += 5571
-            if(data_size < 100000):
-                # print(file)
-                result = stack_evalute(data)
-                # print(result)
-                if(result):
-                    cnt_valid += 1
-                    verified_filepath = os.path.join(verified_folder, filename)
-                    shutil.copy(filepath, verified_filepath)
-                # else :
-                #    print(file)
-                #    verified_filepath = os.path.join(verified_folder, filename)
-                #    with open(verified_filepath, 'w') as verified_file:
-                #       json.dump(data, verified_file)
+            # print(file)
+            result = stack_evalute(data)
+            # print(result)
+            if(result):
+               cnt_valid += 1
+               verified_filepath = os.path.join(verified_folder, filename)
+               shutil.copy(filepath, verified_filepath)
+            # else :
+            #    print(file)
+            #    verified_filepath = os.path.join(verified_folder, filename)
+            #    with open(verified_filepath, 'w') as verified_file:
+            #       json.dump(data, verified_file)
     return cnt_valid
 
 def write_to_txt(block_header, coinbase_txn, txid_list, output_file):
