@@ -2,29 +2,7 @@ import op_codes
 import sig_verification
 import json 
 def execute_script_V0p2wpkh(data,scriptsig,pubkey,pubkey_hash):
-    # global c
-    # tokens = evaluate.split(" ")
-    # stack = []
     is_valid = True
-    # Initialize a pointer to move through the tokens
-    # i = 0
-    # while i < len(tokens):
-    #     op = tokens[i]
-    #     # Check which operation and handle accordingly
-    #     # if op.startswith("OP_PUSHBYTES_"):
-    #     #     stack, i = op_codes.op_pushbytes_(op,tokens,stack,i)
-    #     elif op == "OP_DUP":
-    #         stack = op_codes.op_dup(stack)
-    #     elif op == "OP_HASH160":
-    #         stack = op_codes.op_hash160(stack)
-    #     elif op == "OP_EQUALVERIFY":
-    #         is_valid, stack = op_codes.op_equalverify(stack)
-    #     elif op == "OP_CHECKSIG":
-    #         is_valid = op_codes.op_checksig(stack,data,l)
-    #     else:
-    #         raise Exception("Unsupported operation")
-        
-        # i += 1
     try_pubkeyhash = op_codes.hash160(pubkey)
     if(try_pubkeyhash == pubkey_hash):
        message = op_codes.message_serilization_p2wpkh(data,scriptsig,pubkey,pubkey_hash)
@@ -89,7 +67,7 @@ def execute_script_V0p2wpkh(data,scriptsig,pubkey,pubkey_hash):
 # pubkeyhash = "f8d9f2203c6f0773983392a487d45c0c818f9573"
 
 
-# execute_script_V0p2wpkh(data,sigscript,pubkey,pubkeyhash)
+# print(execute_script_V0p2wpkh(data,sigscript,pubkey,pubkeyhash))
 
 
 # #01000000000101bb3b4760944489ec9bed5d5fb002f33b3dda278784d7faef371067e518c97d3b1000000000ffffffff02a0860100000000001976a9146085312a9c500ff9cc35b571b0a1e5efb7fb9f1688ac163d340200000000160014ad4cc1cc859c57477bf90d0f944360d90a3998bf024730440220780ad409b4d13eb1882aaf2e7a53a206734aa302279d6859e254a7f0a7633556022011fd0cbdf5d4374513ef60f850b7059c6a093ab9e46beb002505b7cba0623cf30121022bf8c45da789f695d59f93983c813ec205203056e19ec5d3fbefa809af67e2ec00000000

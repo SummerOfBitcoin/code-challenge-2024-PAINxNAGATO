@@ -98,13 +98,7 @@ def transaction_header_p2wpkh(data):
 
     message += version
 
-    # message += "00" # marker
-
-    # message += "01" # flag 
-
-    # compact size
     message += compactSize.compact_size_calculator(len(data['vin']))
-    # message += "{:02d}".format(len(data['vin']))
 
     for vin in data['vin']:
         big_endian_txid = vin['txid']
