@@ -184,7 +184,7 @@ def message_serilization_p2wpkh(data,sigscript,pubkey,pubkey_hash):
 
     
     scriptcode = "1976a914" + pubkey_hash + "88ac"
-
+    
     amount = struct.pack('<Q', vin['prevout']['value']).hex()
     
     input_hash = double_sha256(bytes.fromhex(input)).hex()
