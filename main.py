@@ -104,21 +104,21 @@ def write_to_txt(block_header, coinbase_txn, txid_list, output_file):
 #     # Assuming txid is a hexadecimal string
 #     return txid[::-1]
 
-input_folder = "mempool"
+# input_folder = "mempool"
 
-output_folder_p2pkh = "categorized_scripts/p2pkh"
+# output_folder_p2pkh = "categorized_scripts/p2pkh"
 
-output_folder_p2wpkh = "categorized_scripts/v0_p2wpkh"
+# output_folder_p2wpkh = "categorized_scripts/v0_p2wpkh"
 
-output_merged = "merged_folder"
+# output_merged = "merged_folder"
 
-UniqueScript.filter_transactions(input_folder, output_folder_p2pkh)
+# UniqueScript.filter_transactions(input_folder, output_folder_p2pkh)
 
-categorize.p2wpkh_single(input_folder,output_folder_p2wpkh)
+# categorize.p2wpkh_single(input_folder,output_folder_p2wpkh)
 
-categorize.merge_folders(output_folder_p2pkh,output_folder_p2wpkh,output_merged)
+# categorize.merge_folders(output_folder_p2pkh,output_folder_p2wpkh,output_merged)
 
-valid_count = parse_json_files_in_folder(output_merged)
+# valid_count = parse_json_files_in_folder(output_merged)
 
 # valid_count = parse_json_files_in_folder(output_folder_p2wpkh)
 
