@@ -74,7 +74,7 @@ def extract_txids_from_folder(folder_path):
             filepath = os.path.join(folder_path, filename)
             with open(filepath, 'r') as file:
                 data = json.load(file)
-                if(data["vin"][0]["prevout"]["scriptpubkey_type"] == "p2pkh" or data["vin"][0]["prevout"]["scriptpubkey_type"] == "p2sh"):
+                if(data["vin"][0]["prevout"]["scriptpubkey_type"] == "p2pkh"):
                     txid = transaction_header_p2pkh(data)
                     if txid:
                         txids.append(txid)

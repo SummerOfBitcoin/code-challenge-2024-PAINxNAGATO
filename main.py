@@ -28,7 +28,7 @@ def execute_script_p2pkh(evaluate, stack, data,l):
             stack = op_codes.op_dup(stack)
         elif op == "OP_HASH160":
             stack = op_codes.op_hash160(stack)
-        elif op == "OP_EQUALVERIFY" or op == "OP_EQUAL":
+        elif op == "OP_EQUALVERIFY":
             is_valid, stack = op_codes.op_equalverify(stack)
         elif op == "OP_CHECKSIG":
             is_valid = op_codes.op_checksig(stack,data,l)
@@ -44,7 +44,7 @@ def stack_evalute(data):
   l = 1
 #   script_result = True
   for vin in data['vin']:
-    if vin["prevout"]["scriptpubkey_type"] == "p2pkh" or vin["prevout"]["scriptpubkey_type"] == "p2sh":
+    if vin["prevout"]["scriptpubkey_type"] == "p2pkh":
       evaluate = ''
       scriptsig_asm = vin.get('scriptsig_asm', '')
       scriptpubkey_asm = vin['prevout'].get('scriptpubkey_asm', '') if 'prevout' in vin else ''
@@ -108,21 +108,21 @@ def reverse_byte_order(txid):
     # Assuming txid is a hexadecimal string
     return txid[::-1]
 
-# input_folder = "mempool"
+input_folder = "mempool"
 
-# output_folder_p2pkh = "categorized_scripts/p2pkh"
+output_folder_p2pkh = "categorized_scripts/p2pkh"
 
-# output_folder_p2wpkh = "categorized_scripts/v0_p2wpkh"
+output_folder_p2wpkh = "categorized_scripts/v0_p2wpkh"
 
-# output_merged = "merged_folder"
+output_merged = "merged_folder"
 
-# UniqueScript.filter_transactions(input_folder, output_folder_p2pkh)
+UniqueScript.filter_transactions(input_folder, output_folder_p2pkh)
 
-# categorize.p2wpkh_single(input_folder,output_folder_p2wpkh)
+categorize.p2wpkh_single(input_folder,output_folder_p2wpkh)
 
-# categorize.merge_folders(output_folder_p2pkh,output_folder_p2wpkh,output_merged)
+categorize.merge_folders(output_folder_p2pkh,output_folder_p2wpkh,output_merged)
 
-# valid_count = parse_json_files_in_folder(output_merged)
+valid_count = parse_json_files_in_folder(output_merged)
 
 # valid_count = parse_json_files_in_folder("p2sh")
 
