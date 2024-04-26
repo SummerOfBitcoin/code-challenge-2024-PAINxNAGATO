@@ -42,4 +42,3 @@ def mining():
             break
         nonce += 1
     return header.hex()
-
