@@ -57,7 +57,8 @@ def op_equalverify(stack):
     if len(stack) >= 2:
         a = stack.pop()
         b = stack.pop()
-        if a != b:
+        # if a != b:
+        if a == b:
             return True, stack
         else :
             # print("OP_equalverified")
