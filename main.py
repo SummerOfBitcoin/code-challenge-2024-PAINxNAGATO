@@ -124,10 +124,10 @@ def reverse_byte_order(txid):
 
 # valid_count = parse_json_files_in_folder(output_merged)
 
-valid_count = parse_json_files_in_folder("p2sh")
+# valid_count = parse_json_files_in_folder("p2sh")
 
 
-print(f"{valid_count}")
+# print(f"{valid_count}")
 
 
 
