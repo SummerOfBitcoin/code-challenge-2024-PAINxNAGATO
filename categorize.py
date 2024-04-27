@@ -2,9 +2,9 @@ import os
 import json
 import shutil
 
+# 
+
 def p2wpkh_single(input_folder, output_folder):
-    # input_folder = "categorized_scripts/v0_p2wpkh"
-    # output_folder = "p2wpkh_one"
 
     # Ensure the output folder exists or create it
     if not os.path.exists(output_folder):
