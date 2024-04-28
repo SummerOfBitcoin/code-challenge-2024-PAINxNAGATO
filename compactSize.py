@@ -1,19 +1,21 @@
+# code to create an compact size calculator for later use.
+
 def compact_size_calculator(number):
     if number < 0:
         raise ValueError("Number must be non-negative.")
 
     if number < 253:
-        return format(number, '02x')  # Single byte representation
+        return format(number, '02x') 
+     
     elif number <= 0xFFFF:
-        return 'fd' + format(number, '04x')  # FD prefix + 2-byte representation
+        return 'fd' + format(number, '04x') 
+    
     elif number <= 0xFFFFFFFF:
-        return 'fe' + format(number, '08x')  # FE prefix + 4-byte representation
+        return 'fe' + format(number, '08x')  
+    
     elif number <= 0xFFFFFFFFFFFFFFFF:
-        return 'ff' + format(number, '016x')  # FF prefix + 8-byte representation
+        return 'ff' + format(number, '016x')  
+    
     else:
-        raise ValueError("Number is too large to be represented with compact size.")
+        raise ValueError("Inavlid Number.")
 
-# Test the function
-# number = 22
-# compact_size = compact_size_calculator(number)
-# print("Compact Size Representation:", compact_size)

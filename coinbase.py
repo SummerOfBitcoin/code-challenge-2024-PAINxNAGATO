@@ -1,19 +1,33 @@
+# important imports  
+
 import os
 import json
 import struct
 import wtxid
 
+# version 
+
 version = "01000000"
+
+# marker and flags
 
 marker =  "00"
 
 flag = "01"
 
+# input count of the coinbase transactions
+
 inputcount = "01"
+
+# Txid of coinbase transaction 
 
 txid = "0000000000000000000000000000000000000000000000000000000000000000"
 
+# vout 
+
 vout = "ffffffff"
+
+# scriptsig for coinbase 
 
 scriptsigsize = "1b"
 
@@ -22,8 +36,6 @@ scriptsig = "0300000004f15ccf5609013803062b9b5a0100072f425443432f20"
 sequence = "ffffffff"
 
 outputcount = "02"
-
-# amount = "will look later"
 
 scriptpubkeysize = "19"
 
@@ -35,17 +47,21 @@ fixed_header = "6a24aa21a9ed"
 
 scriptpubkey_size_2 = "26" 
 
-# scriptpubkey_2 = ""
-
 witness_stackitems = "01"
 
 item_size = "20"
 
+# witness reserved value 
+
 item = "0000000000000000000000000000000000000000000000000000000000000000"
+
+# locktime
 
 locktime = "00000000"
 
 amount_newblock = 625000000
+
+# calculating the mining fees 
 
 def calculate_sum_of_differences(folder_path):
     differences = []
@@ -60,35 +76,26 @@ def calculate_sum_of_differences(folder_path):
                 differences.append(difference)
     return sum(differences)
 
-# Example usage:
-# folder_path = "verified_transactions"
-
-# sum_of_differences = calculate_sum_of_differences(folder_path)
-
-# block_fees = amount_newblock + sum_of_differences
-
-# bf_hex = struct.pack('<Q', block_fees).hex()
-
-# print(bf_hex)
-
-
+# function to create the coinbase transaction 
 
 def coinbase_tx(folder_path):
     sum_of_differences = calculate_sum_of_differences(folder_path)
 
     wit_roothash = wtxid.witness_roothash(folder_path)
+    
+    # witness commitment 
 
     wtxid_commit = wtxid.wtxid_commitment(wit_roothash,item)
+    
+    # mining fees 
 
     block_fees = amount_newblock + sum_of_differences
 
     bf_hex = struct.pack('<Q', block_fees).hex()
-
-
+    
+    # coinbase to be added to output.txt
 
     message = version + marker + flag + inputcount + txid + vout + scriptsigsize + scriptsig + sequence + outputcount + bf_hex + scriptpubkeysize + scriptpubkey + amount_output2 + scriptpubkey_size_2 + fixed_header + wtxid_commit + witness_stackitems + item_size + item + locktime
-
-    # print(sum_of_differences)
 
     return message
 
