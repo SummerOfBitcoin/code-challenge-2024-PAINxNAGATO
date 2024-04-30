@@ -1,28 +1,28 @@
 # Solution for Assignment
 
 ## Assignment Flowchart
-The design approach involves several key steps to construct a valid block from the transactions in the mempool. The overview of the Whole Assignemnt Created :
+The design approach involves several important steps to construct a valid block from the transactions jsons in the mempool. The overview of the whole Assignemnt is as follows :
 
-1. **Filtering Transactions**: The program filters transactions based on their script type, segregating them into separate folders for P2PKH and P2WPKH scripts.
+1. **Filtering Transactions**: The program filters transactions based on their script type, separating them into separate folders for `p2pkh` and `p2wpkh` scripts.
 
-2. **Script Evaluation**: Transaction scripts are verfied for validity, ensuring that they are in accordance with the specified script format and  signature verification holds.
+2. **Script Evaluation**: Transaction jsons are verfied for validity, ensuring that the proper script format and  signature verification holds.
 
-3. **Transaction Header Generation**: Transaction headers are generated for both P2PKH and P2WPKH transaction types, facilitating Merkle root hash computation for the block as an whole.
+3. **Transaction Header Generation**: Transaction headers are generated for both `p2pkh` and `p2wpkh`.
 
-4. **Merkle Root Calculation**: The Merkle root hash is computed from the list of transaction hashes in the "verified_transactions" folder.
+4. **Merkle Root Calculation**: The Merkle root hash is generated from the list of Txids of the `verified` transaction jsons.
 
 5. **Coinbase Transaction Creation**: The Coinbase transaction, including the mining fees and witness commitment, is generated as the first transaction in the valid block.
 
-6. **Mining**: A simple mining algorithm is employed to find a valid block header given the current block data with the provided difficukty target of `0000ffff00000000000000000000000000000000000000000000000000000000`.
+6. **Mining**: An mining algorithm is used to find a valid block header given the current block data with the provided difficulty target of `0000ffff00000000000000000000000000000000000000000000000000000000`.
 
 7. **Block Header Creation**: The block header is constructed using the mined nonce, previous block header, Merkel Root and Mining Time.
 
-8. **Valid Block Creation**: The valid block, containing the valid block header, the Coinbase transaction, the coinbase Txid and other verified transactions txids, is created.
+8. **Valid Block Creation**: The valid block, containing the valid block header, the Coinbase transaction, the coinbase TxID and other verified transactions TxIDs, is created.
 
-9. **Output Generation**: The block header and transaction IDs are written to the output.txt file.
+9. **Output Generation**: The block header, the coinbase transactions and  TxIDs of verified transactions are written to the output.txt file.
 
-## Implementation Logic
-Here's a breakdown of the implementation details for each step:
+## Implementation Details
+The implementation details for each step is given as follows:
 
 1. **Filtering Transactions**
     - The `filter_transactions` function reads JSON files from the mempool folder, filters transactions based on their script type, and copies valid transactions to the "verified_transactions" folder.
@@ -40,7 +40,7 @@ Here's a breakdown of the implementation details for each step:
     - Output: Boolean indicating script validity.
 
 3. **Transaction Header Generation**
-    - Functions `transaction_header_p2pkh` and `transaction_header_p2wpkh` generate transaction headers for P2PKH and P2WPKH transactions, respectively.
+    - Functions `transaction_header_p2pkh` and `transaction_header_p2wpkh` generate transaction headers for `p2pkh` and `p2wpkh` transactions, respectively.
 
     - Input: Transaction data.
 
@@ -48,7 +48,7 @@ Here's a breakdown of the implementation details for each step:
 
 4. **Merkle Root Calculation**
     - The `return_merkelhash` function computes the Merkle root hash from the list of transaction IDs in the "verified_transactions" folder.
-    - Input: None.
+    - Input: Valid TxIDs.
 
     - Output: Merkle root hash.
 
@@ -58,43 +58,41 @@ Here's a breakdown of the implementation details for each step:
 
     - Input: Path to the folder containing verified transactions.
 
-    - Output: Coinbase transaction string.
+    - Output: Coinbase transaction.
 
 6. **Mining**
-    - The `mining` function implements a simple mining algorithm to find a valid block header given the current block data.
+    - The `mining` function implements an mining algorithm to find a valid block header given the current block data.
 
-    - Input: None.
+    - Input: Previous block header, merkel root hash, nonce, Unix time.
 
     - Output: Valid block header hash.
 
 7. **Block Header Creation**
-    - The block header is constructed using the mined nonce, Merkle root hash, and other relevant information.
+    - The block header is constructed using the mined nonce, merkle root hash, and other relevant information.
 
-    - Input: Mined nonce, Merkle root hash, and block data.
+    - Input: mined nonce, merkle root hash, and block data.
 
-    - Output: Block header string.
+    - Output: Block header.
 
 8. **Valid Block Creation**
     - The valid block is created by combining the block header and the Coinbase transaction with other verified transactions.
 
-    - Input: Block header, Coinbase transaction, and list of transaction IDs.
+    - Input: Block header, Coinbase transaction, and list of TxIDs.
 
-    - Output: Valid block string.
+    - Output: Valid block.
 
 9. **Output Generation**
-    - The block header and transaction IDs are written to the output.txt file.
+    - The block header, the coinbase transactions and TxIDs are written to the output.txt file.
 
-    - Input: Block header, Coinbase transaction, and list of transaction IDs.
+    - Input: Block header, Coinbase transaction, coinbase Txid and list of TxIDs.
 
-    - Output: Output.txt file containing the block data.
+    - Output: Output.txt file.
 
 ## Results and Performance
-The program efficiently constructs valid Bitcoin transactions and blocks, ensuring script execution. Performance may vary depending on the number and complexity of transactions,But the solution tries to tackle all those conditions and creates an valid block with `2746` transactions with a mining fees of `13267862` satoshis excluding the block fees of `6.25` bitcoin with an weight of `2348636`.
+The program constructs valid Bitcoin transactions and blocks. Performance may vary depending on the number and complexity of transactions,But the solution tries to tackle all those conditions and creates an valid block with `2746` transactions with a mining fees of `13267862` satoshis excluding the block fees of `6.25` bitcoin with an weight of `2348636`.
 
 ## Conclusion
-The provided solution offers an implementation for constructing an single block of valid Bitcoin transactions. It demonstrates the process of evaluating transaction scripts, calculating mining fees, computing the Merkle root hash, mining a valid block header, and creating a valid block. 
+The provided solution outlines an implementation for constructing a single block of valid Bitcoin transactions. It demonstrates the process of evaluating transaction scripts, calculating mining fees, computing the merkle root hash, mining a valid block header, and creating a valid block that is ready to be pushed into the network.
 ## References
 - Bitcoin Technical Documentation: [learn me a bitcoin](https://learnmeabitcoin.com/)
-- Bitcoin Script: [Bitcoin Wiki - Script](https://en.bitcoin.it/wiki/Script)
 - ECDSA Python Library: [Python ECDSA Library](https://github.com/warner/python-ecdsa)
-
